@@ -24,15 +24,62 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
     }
 
     StoreRGB(tag, r, g, b, a) {
+      this.colorMap[tag] = {
+        hex: this.RGBToHex(r, g, b, a),
+        packed: this.RGBToPacked(r, g, b, a),
+        rgb255: {r: r, g: g, b: b, a: a},
+        rgb: {
+          r: this.NomalizeColorValue(r),
+          g: this.NomalizeColorValue(g),
+          b: this.NomalizeColorValue(b), 
+          a: this.NomalizeColorValue(a)
+        }
+      };
     }
 
     StoreRGBNormal(tag, r, g, b, a) {
+      this.colorMap[tag] = {
+        hex: this.RGBNormalToHex(r, g, b, a),
+        packed: this.RGBNormalToPacked(r, g, b, a),
+        rgb: {r: r, g: g, b: b, a: a},
+        rgb255: {
+          r: this.DenormalizeColorValue(r),
+          g: this.DenormalizeColorValue(g),
+          b: this.DenormalizeColorValue(b), 
+          a: this.DenormalizeColorValue(a)
+        }
+      };
     }
 
     StoreHex(tag, hex) {
+      const rgb = this.HexToRGB(hex);
+      this.colorMap[tag] = {
+        hex: hex,
+        packed: this.RGBToPacked(rgb.r, rgb.g, rgb.b, rgb.a),
+        rgb: {
+          r: this.NomalizeColorValue(rgb.r),
+          g: this.NomalizeColorValue(rgb.g),
+          b: this.NomalizeColorValue(rgb.b), 
+          a: this.NomalizeColorValue(rgb.a)
+        },
+        rgb255: rgb
+      };
     }
 
     StorePacked(tag, packed) {
+      debugger;
+      const rgb = this.PackedToRGB(packed);
+      this.colorMap[tag] = {
+        hex: this.RGBToHex(rgb.r, rgb.g, rgb.b, rgb.a),
+        packed: packed,
+        rgb: {
+          r: this.NomalizeColorValue(rgb.r),
+          g: this.NomalizeColorValue(rgb.g),
+          b: this.NomalizeColorValue(rgb.b), 
+          a: this.NomalizeColorValue(rgb.a)
+        },
+        rgb255: rgb
+      };
     }
 
     NomalizeRBG(r, g, b, a) {
@@ -71,17 +118,21 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
     HexToRGBNormal(hex) {
       const color = new C3.Color(0,0,0,0);
       color.parseHexString(hex);
-      return {r: color.getR(), g: color.getG(), b: color.getB(), a: color.getA()};
+      return {
+        r: color.getR(), 
+        g: color.getG(), 
+        b: color.getB(), 
+        a: color.getA()};
     }
 
     HexToRGB(hex) {
       const color = new C3.Color(0,0,0,0);
       color.parseHexString(hex);
       return {
-        r: this.NomalizeColorValue(color.getR()), 
-        g: this.NomalizeColorValue(color.getG()), 
-        b: this.NomalizeColorValue(color.getB()), 
-        a: this.NomalizeColorValue(color.getA())
+        r: this.DenormalizeColorValue(color.getR()), 
+        g: this.DenormalizeColorValue(color.getG()), 
+        b: this.DenormalizeColorValue(color.getB()), 
+        a: this.DenormalizeColorValue(color.getA())
       };
     }
 
@@ -123,39 +174,56 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
     }
 
     Hex(tag) {
+      return this.colorMap[tag].hex;
     }
 
     Packed(tag) {
+      return this.colorMap[tag].packed;
+    }
+
+    RGB(tag) {
+      //todo: return "rbg(x,x,x)"
     }
 
     R(tag) {
+      return this.colorMap[tag].rgb255.r;
     }
 
     G(tag) {
+      return this.colorMap[tag].rgb255.g;
     }
 
     B(tag) {
+      return this.colorMap[tag].rgb255.b;
     }
 
     A(tag) {
+      return this.colorMap[tag].rgb255.a;
     }
+    
 
     NormalR(tag) {
+      return this.colorMap[tag].rgb.r;
     }
 
     NormalG(tag) {
+      return this.colorMap[tag].rgb.g;
     }
 
     NormalB(tag) {
+      return this.colorMap[tag].rgb.b;
     }
 
     NormalA(tag) {
+      return this.colorMap[tag].rgb.a;
     }
 
     AsJSON() {
+      return JSON.stringify(this.colorMap);
     }
 
     LoadJSON(json) {
+      this.colorMap = JSON.parse(json);
     }
 
     Release() {

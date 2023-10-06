@@ -2,12 +2,23 @@ const express = require("express");
 const { exec } = require("child_process");
 const chokidar = require("chokidar");
 const cors = require("cors");
+const { exit } = require("process");
 
 let port = 3000;
 const path = () => `http://localhost:${port}/addon.json`;
 
 // Execute build command
 const runBuild = () => {
+  console.log("Running validation...");
+  exec("node validate.js", (error, stdout, stderr) => {
+    if (error || stderr) {
+      console.log(stdout);
+      console.log(`Error: ${error.message}`);
+      exit(1);
+    }
+    console.log("Validation complete.");
+  });
+
   console.log("Running build...");
   exec("node build.js --dev", (error, stdout, stderr) => {
     if (error) {
