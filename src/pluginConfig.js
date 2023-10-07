@@ -17,7 +17,7 @@ module.exports = {
     // "general",
   author: "piranha305",
   website: "https://www.construct.net",
-  documentation: "https://www.construct.net",
+  documentation: "https://github.com/armandoalonso/color-store#readme",
   description: "A database for storing and retrieving colors",
   // addonUrl: "https://www.construct.net/en/make-games/addons/####/XXXX", // displayed in auto-generated docs
   // githubUrl: "https://github.com/skymen/XXXX", // displays latest release version in auto-generated docs
@@ -267,6 +267,50 @@ module.exports = {
       displayText: "Set color [i]{0}[/i] to rgba([i]{1}[/i], [i]{2}[/i], [i]{3}[/i], [i]{4}[/i])",
       description: "Sets the color",
     },
+    SetColorHSL: {
+      category: "general",
+      forward: "StoreHSL",
+      params: [
+        {
+          id: "tag",
+          name: "Tag",
+          desc: "The tag that will be used to reference the color",
+          type: "string",
+          value: "",
+        },
+        {
+          id: "h",
+          name: "Hue",
+          desc: "The hue value (0-360) you want to set",
+          type: "number",
+          value: "0",
+        },
+        {
+          id: "s",
+          name: "Saturation",
+          desc: "The saturation value (0-100) you want to set",
+          type: "number",
+          value: "0",
+        },
+        {
+          id: "l",
+          name: "Lightness",
+          desc: "The lightness value (0-100) you want to set",
+          type: "number",
+          value: "0",
+        },
+        {
+            id: "a",
+            name: "Alpha",
+            desc: "The alpha value (0-255) you want to set",
+            type: "number",
+            value: "255",
+        }
+      ],
+      listName: "Set color (hsl)",
+      displayText: "Set color [i]{0}[/i] to hsla([i]{1}[/i], [i]{2}[/i], [i]{3}[/i], [i]{4}[/i])",
+      description: "Sets the color",
+    },
     LoadJSON: {
       category: "general",
       forward: "LoadJSON",
@@ -503,21 +547,6 @@ module.exports = {
       returnType: "number",
       description: "Returns the color as a packed number",
     },
-    RGB: {
-      category: "general",
-      forward: "RGB",
-      params: [
-        {
-          id: "tag",
-          name: "Tag",
-          desc: "The tag that will be used to reference the color",
-          type: "string",
-          value: "",
-        },
-      ],
-      returnType: "string",
-      description: "Returns the color as an RGB object",
-    },
     R:{
       category: "general",
       forward: "R",
@@ -637,6 +666,51 @@ module.exports = {
       ],
       returnType: "number",
       description: "Returns the normal's alpha value",
+    },
+    Hue: {
+      category: "general",
+      forward: "Hue",
+      params: [
+        {
+          id: "tag",
+          name: "Tag",
+          desc: "The tag that will be used to reference the normal",
+          type: "string",
+          value: "",
+        },
+      ],
+      returnType: "number",
+      description: "Returns the color's hue value",
+    },
+    Saturation: {
+      category: "general",
+      forward: "Saturation",
+      params: [
+        {
+          id: "tag",
+          name: "Tag",
+          desc: "The tag that will be used to reference the normal",
+          type: "string",
+          value: "",
+        },
+      ],
+      returnType: "number",
+      description: "Returns the color's saturation value",
+    },
+    Lightness: {
+      category: "general",
+      forward: "Lightness",
+      params: [
+        {
+          id: "tag",
+          name: "Tag",
+          desc: "The tag that will be used to reference the normal",
+          type: "string",
+          value: "",
+        },
+      ],
+      returnType: "number",
+      description: "Returns the color's lightness value",
     },
     AsJSON: {
       category: "general",

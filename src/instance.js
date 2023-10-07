@@ -6,13 +6,14 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
       super(inst);
 
       this.colorMap = {};
-      //example
-      this.colorMap["red"] = {
-        hex: "#ff0000",
-        packed: 4278190335,
-        rgb255: {r: 255,g: 0,b: 0, a: 255},     
-        rgb: {r: 1,g: 0,b: 0, a: 1},
-      };
+      // Example
+      // this.colorMap["red"] = {
+      //   hex: "#ff0000",
+      //   packed: 4278190335,
+      //   rgb255: {r: 255,g: 0,b: 0, a: 255},     
+      //   rgb: {r: 1,g: 0,b: 0, a: 1},
+      //   hsla: {h: 0,s: 1,l: 0.5,a: 1}
+      // };
     }
 
     NomalizeColorValue(color) {
@@ -33,7 +34,8 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
           g: this.NomalizeColorValue(g),
           b: this.NomalizeColorValue(b), 
           a: this.NomalizeColorValue(a)
-        }
+        },
+        hsla: this.RGBToHLSA(r, g, b, a)
       };
     }
 
@@ -47,7 +49,13 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
           g: this.DenormalizeColorValue(g),
           b: this.DenormalizeColorValue(b), 
           a: this.DenormalizeColorValue(a)
-        }
+        },
+        hsla: this.RGBToHLSA(
+          this.DenormalizeColorValue(r), 
+          this.DenormalizeColorValue(g),
+          this.DenormalizeColorValue(b), 
+          this.DenormalizeColorValue(a)
+        )
       };
     }
 
@@ -62,12 +70,12 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
           b: this.NomalizeColorValue(rgb.b), 
           a: this.NomalizeColorValue(rgb.a)
         },
-        rgb255: rgb
+        rgb255: rgb,
+        hsla: this.RGBToHLSA(rgb.r, rgb.g, rgb.b, rgb.a)
       };
     }
 
     StorePacked(tag, packed) {
-      debugger;
       const rgb = this.PackedToRGB(packed);
       this.colorMap[tag] = {
         hex: this.RGBToHex(rgb.r, rgb.g, rgb.b, rgb.a),
@@ -78,7 +86,25 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
           b: this.NomalizeColorValue(rgb.b), 
           a: this.NomalizeColorValue(rgb.a)
         },
-        rgb255: rgb
+        rgb255: rgb,
+        hsla: this.RGBToHLSA(rgb.r, rgb.g, rgb.b, rgb.a)
+      };
+    }
+
+    StoreHSL(tag, h, s, l, a) {
+      const rgb = this.HLSAToRGB(h, s, l, a);
+
+      this.colorMap[tag] = {
+        hex: this.RGBToHex(rgb.r, rgb.g, rgb.b, rgb.a),
+        packed: this.RGBToPacked(rgb.r, rgb.g, rgb.b, rgb.a),       
+        rgb: {
+          r: this.NomalizeColorValue(rgb.r),
+          g: this.NomalizeColorValue(rgb.g),
+          b: this.NomalizeColorValue(rgb.b), 
+          a: this.NomalizeColorValue(rgb.a)
+        },
+        rgb255: rgb,
+        hsla: { h: h, s: s, l: l, a: a }
       };
     }
 
@@ -97,6 +123,34 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
         g: this.DenormalizeColorValue(g),
         b: this.DenormalizeColorValue(b),
         a: this.DenormalizeColorValue(a),
+      };
+    }
+
+    HLSAToRGB(h, s, l, a) {
+      const color = new C3.Color(0,0,0,0);
+      color.setFromHSLA(h, s, l, a);
+      return {
+        r: this.DenormalizeColorValue(color.getR()), 
+        g: this.DenormalizeColorValue(color.getG()), 
+        b: this.DenormalizeColorValue(color.getB()), 
+        a: this.DenormalizeColorValue(color.getA())
+      };
+    }
+
+    RGBToHLSA(r, g, b, a) {
+      debugger;
+      const color = new C3.Color(
+        this.NomalizeColorValue(r), 
+        this.NomalizeColorValue(g), 
+        this.NomalizeColorValue(b), 
+        this.NomalizeColorValue(a)
+      );
+      const hsla = color.toHSLAArray();
+      return {
+        h: hsla[0], 
+        s: hsla[1], 
+        l: hsla[2], 
+        a: this.DenormalizeColorValue(hsla[3]),
       };
     }
 
@@ -181,10 +235,6 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
       return this.colorMap[tag].packed;
     }
 
-    RGB(tag) {
-      //todo: return "rbg(x,x,x)"
-    }
-
     R(tag) {
       return this.colorMap[tag].rgb255.r;
     }
@@ -201,6 +251,17 @@ function getInstanceJs(parentClass, scriptInterface, addonTriggers, C3) {
       return this.colorMap[tag].rgb255.a;
     }
     
+    Hue(tag) {
+      return this.colorMap[tag].hsla.h;
+    }
+
+    Saturation(tag) {
+      return this.colorMap[tag].hsla.s;
+    }
+
+    Lightness(tag) {
+      return this.colorMap[tag].hsla.l;
+    }
 
     NormalR(tag) {
       return this.colorMap[tag].rgb.r;
