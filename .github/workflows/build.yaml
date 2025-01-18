@@ -69,7 +69,7 @@ jobs:
         if: steps.check.outputs.publish == 'true'
         id: url
         run: |
-          url=$(grep -oP 'addonUrl:\s?"\K[^"]*' config.caw.js | cut -d '"' -f 1)
+          url=$(grep -oP 'addonUrl:\s?"\K[^"]*' buildconfig.js | cut -d '"' -f 1)
           echo "Addon Url: $url"
           if [[ -z "$url" ]]; then
             echo "Addon Url is not set. skip publishing."

@@ -1,8 +1,8 @@
 <img src="./examples/cover.png" width="150" /><br>
 # Color Store
-### Version 3.0.0.3
+### Version 3.0.0.4
 
-[<img src="https://placehold.co/200x50/4493f8/FFF?text=Download&font=montserrat" width="200"/>](https://github.com/armandoalonso/color-store/releases/download/piranha305_colorstore-3.0.0.3.c3addon/piranha305_colorstore-3.0.0.3.c3addon)
+[<img src="https://placehold.co/200x50/4493f8/FFF?text=Download&font=montserrat" width="200"/>](https://github.com/armandoalonso/color-store/releases/download/piranha305_colorstore-3.0.0.4.c3addon/piranha305_colorstore-3.0.0.4.c3addon)
 <br>
 <sub> [See all releases](https://github.com/armandoalonso/color-store/releases) </sub> <br>
 
@@ -10,7 +10,7 @@
 Description <br>
 <b><u>Author:</u></b> piranha305 <br>
 <b><u>Website:</u></b> https://piranha305.itch.io/ <br>
-<b><u>Addon Url:</u></b> undefined <br>
+<b><u>Addon Url:</u></b> https://www.construct.net/en/make-games/addons/1372/colorstore <br>
 <sub>Made using [CAW](https://marketplace.visualstudio.com/items?itemName=skymen.caw) </sub><br>
 
 ## Table of Contents

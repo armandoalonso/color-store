@@ -96,7 +96,7 @@ export default async function generateDocumentation() {
     readme.push(`<b><u>Website:</u></b> ${config.website} <br>`);
   }
   if (publishConfig && publishConfig.addonUrl !== "") {
-    readme.push(`<b><u>Addon Url:</u></b> ${config.addonUrl} <br>`);
+    readme.push(`<b><u>Addon Url:</u></b> ${publishConfig.addonUrl} <br>`);
   }
   //add link to c3ide2-framework
   readme.push(
