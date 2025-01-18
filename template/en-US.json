@@ -6,10 +6,10 @@
       "piranha305_colorstore": {
         "name": "Color Store",
         "description": "Description",
-        "help-url": "https://www.construct.net",
+        "help-url": "https://www.construct.net/en/make-games/addons/1372/colorstore/documentation",
         "aceCategories": {
           "general": "General",
-          "loading": "loading",
+          "loading": "Loading",
           "conversion": "Conversion"
         },
         "properties": {},

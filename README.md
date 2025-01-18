@@ -1,8 +1,8 @@
 <img src="./examples/cover.png" width="150" /><br>
 # Color Store
-### Version 3.0.0.2
+### Version 3.0.0.3
 
-[<img src="https://placehold.co/200x50/4493f8/FFF?text=Download&font=montserrat" width="200"/>](https://github.com/armandoalonso/color-store/releases/download/piranha305_colorstore-3.0.0.2.c3addon/piranha305_colorstore-3.0.0.2.c3addon)
+[<img src="https://placehold.co/200x50/4493f8/FFF?text=Download&font=montserrat" width="200"/>](https://github.com/armandoalonso/color-store/releases/download/piranha305_colorstore-3.0.0.3.c3addon/piranha305_colorstore-3.0.0.3.c3addon)
 <br>
 <sub> [See all releases](https://github.com/armandoalonso/color-store/releases) </sub> <br>
 

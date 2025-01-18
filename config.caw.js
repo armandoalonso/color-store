@@ -12,7 +12,7 @@ export const name = "Color Store";
 export const version = _version;
 export const author = "piranha305";
 export const website = "https://piranha305.itch.io/";
-export const documentation = "https://www.construct.net";
+export const documentation = "https://www.construct.net/en/make-games/addons/1372/colorstore/documentation";
 export const description = "Description";
 export const category = ADDON_CATEGORY.DATA_AND_STORAGE;
 
@@ -26,6 +26,7 @@ export const files = {
 export const aceCategories = {
   general: "General",
   conversion: "Conversion",
+  loading: "Loading",
 };
 
 export const info = {
