@@ -1,0 +1,369 @@
+{
+  "languageTag": "en-US",
+  "fileDescription": "Strings for piranha305_colorstore.",
+  "text": {
+    "plugins": {
+      "piranha305_colorstore": {
+        "name": "Color Store",
+        "description": "Description",
+        "help-url": "https://www.construct.net",
+        "aceCategories": {
+          "general": "General",
+          "loading": "loading",
+          "conversion": "Conversion"
+        },
+        "properties": {},
+        "actions": {
+          "SetColorHex": {
+            "list-name": "Set color (hex)",
+            "display-text": "Set color [i]{0}[/i] to [i]{1}[/i]",
+            "description": "Sets the color",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              },
+              "color": {
+                "name": "Color",
+                "desc": "The color value (hex) you want to set"
+              }
+            }
+          },
+          "SetColorHSL": {
+            "list-name": "Set color (hsl)",
+            "display-text": "Set color [i]{0}[/i] to hsla([i]{1}[/i], [i]{2}[/i], [i]{3}[/i], [i]{4}[/i])",
+            "description": "Sets the color",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              },
+              "h": {
+                "name": "Hue",
+                "desc": "The hue value (0-360) you want to set"
+              },
+              "s": {
+                "name": "Saturation",
+                "desc": "The saturation value (0-100) you want to set"
+              },
+              "l": {
+                "name": "Lightness",
+                "desc": "The lightness value (0-100) you want to set"
+              },
+              "a": {
+                "name": "Alpha",
+                "desc": "The alpha value (0-255) you want to set"
+              }
+            }
+          },
+          "SetColorPacked": {
+            "list-name": "Set color (packed)",
+            "display-text": "Set color [i]{0}[/i] to [i]{1}[/i]",
+            "description": "Sets the color",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              },
+              "color": {
+                "name": "Color",
+                "desc": "The color value (0-100) you want to set"
+              }
+            }
+          },
+          "SetColorRGB": {
+            "list-name": "Set color (rgb)",
+            "display-text": "Set color [i]{0}[/i] to rgba255([i]{1}[/i], [i]{2}[/i], [i]{3}[/i], [i]{4}[/i])",
+            "description": "Sets the color",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              },
+              "r": {
+                "name": "Red",
+                "desc": "The red value (0-255) you want to set"
+              },
+              "g": {
+                "name": "Green",
+                "desc": "The green value (0-255) you want to set"
+              },
+              "b": {
+                "name": "Blue",
+                "desc": "The blue value (0-255) you want to set"
+              },
+              "a": {
+                "name": "Alpha",
+                "desc": "The alpha value (0-255) you want to set"
+              }
+            }
+          },
+          "SetColorRGBNormal": {
+            "list-name": "Set color (rgb normalized)",
+            "display-text": "Set color [i]{0}[/i] to rgba([i]{1}[/i], [i]{2}[/i], [i]{3}[/i], [i]{4}[/i])",
+            "description": "Sets the color",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              },
+              "r": {
+                "name": "Red",
+                "desc": "The red value (0-1) you want to set"
+              },
+              "g": {
+                "name": "Green",
+                "desc": "The green value (0-1) you want to set"
+              },
+              "b": {
+                "name": "Blue",
+                "desc": "The blue value (0-1) you want to set"
+              },
+              "a": {
+                "name": "Alpha",
+                "desc": "The alpha value (0-1) you want to set"
+              }
+            }
+          },
+          "ClearColors": {
+            "list-name": "Clear color store",
+            "display-text": "Clear color store",
+            "description": "Clears the color store",
+            "params": {}
+          },
+          "LoadColorsFromHexCodes": {
+            "list-name": "Load colors from hex codes",
+            "display-text": "Load colors from hex codes [i]{0}[/i]",
+            "description": "Loads colors from hex codes",
+            "params": {
+              "hexCodes": {
+                "name": "Hex Codes",
+                "desc": "A comma-separated list of hex codes"
+              }
+            }
+          },
+          "LoadPalette": {
+            "list-name": "Load palette",
+            "display-text": "Load palette [i]{0}[/i]",
+            "description": "Loads a palette",
+            "params": {
+              "palette": {
+                "name": "Palette",
+                "desc": "The palette you want to load",
+                "items": {
+                  "endesga64": "endesga64",
+                  "cc29": "cc29",
+                  "fantasy24": "fantasy24",
+                  "mulfok32": "mulfok32",
+                  "pear32": "pear32",
+                  "pico8": "pico8",
+                  "resurrect64": "resurrect64"
+                }
+              }
+            }
+          }
+        },
+        "conditions": {},
+        "expressions": {
+          "HexToPacked": {
+            "translated-name": "HexToPacked",
+            "description": "Converts Hex to Packed Color",
+            "params": {
+              "hex": {
+                "name": "Hex",
+                "desc": "The hex value"
+              }
+            }
+          },
+          "HexToRGB": {
+            "translated-name": "HexToRGB",
+            "description": "Converts Hex to RGB String '(r,g,b,a)'",
+            "params": {
+              "hex": {
+                "name": "Hex",
+                "desc": "The hex value"
+              }
+            }
+          },
+          "RGBToHex": {
+            "translated-name": "RGBToHex",
+            "description": "Converts RGB to Hex",
+            "params": {
+              "r": {
+                "name": "Red",
+                "desc": "The red value (0-255)"
+              },
+              "g": {
+                "name": "Green",
+                "desc": "The green value (0-255)"
+              },
+              "b": {
+                "name": "Blue",
+                "desc": "The blue value (0-255)"
+              },
+              "a": {
+                "name": "Alpha",
+                "desc": "The alpha value (0-255)"
+              }
+            }
+          },
+          "Alpha": {
+            "translated-name": "Alpha",
+            "description": "Returns the color's alpha value",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "Blue": {
+            "translated-name": "Blue",
+            "description": "Returns the color's blue value",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "CurrentPalette": {
+            "translated-name": "CurrentPalette",
+            "description": "Returns the current palette",
+            "params": {}
+          },
+          "GetColorJson": {
+            "translated-name": "GetColorJson",
+            "description": "Returns the color's value as JSON",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "GetColorStoreJSON": {
+            "translated-name": "GetColorStoreJSON",
+            "description": "Returns the entire color store as JSON",
+            "params": {}
+          },
+          "Green": {
+            "translated-name": "Green",
+            "description": "Returns the color's green value",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "Hex": {
+            "translated-name": "Hex",
+            "description": "Returns the color as a hex string",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "Hue": {
+            "translated-name": "Hue",
+            "description": "Returns the color's hue value",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "Lightness": {
+            "translated-name": "Lightness",
+            "description": "Returns the color's lightness value",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "NormalizedAlpha": {
+            "translated-name": "NormalizedAlpha",
+            "description": "Returns the color's alpha value (normalized)",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "NormalizedBlue": {
+            "translated-name": "NormalizedBlue",
+            "description": "Returns the color's blue value (normalized)",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "NormalizedGreen": {
+            "translated-name": "NormalizedGreen",
+            "description": "Returns the color's green value (normalized)",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "NormalizedREd": {
+            "translated-name": "NormalizedREd",
+            "description": "Returns the color's red value (normalized)",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "Packed": {
+            "translated-name": "Packed",
+            "description": "Returns the color as a packed number",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "RandomColor": {
+            "translated-name": "RandomColor",
+            "description": "Returns a random color tag the color store",
+            "params": {}
+          },
+          "Red": {
+            "translated-name": "Red",
+            "description": "Returns the color's red value",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "Saturation": {
+            "translated-name": "Saturation",
+            "description": "Returns the color's saturation value",
+            "params": {
+              "tag": {
+                "name": "Tag",
+                "desc": "The tag that will be used to reference the color"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
