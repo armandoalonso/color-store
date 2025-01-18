@@ -13,7 +13,7 @@ export const version = _version;
 export const author = "piranha305";
 export const website = "https://piranha305.itch.io/";
 export const documentation = "https://www.construct.net/en/make-games/addons/1372/colorstore/documentation";
-export const description = "Description";
+export const description = "A plugin that allows you manage database of colors. easily convert between different color formats and use existing color palettes.";
 export const category = ADDON_CATEGORY.DATA_AND_STORAGE;
 
 export const hasDomside = false;

@@ -5,7 +5,7 @@
     "plugins": {
       "piranha305_colorstore": {
         "name": "Color Store",
-        "description": "Description",
+        "description": "A plugin that allows you manage database of colors. easily convert between different color formats and use existing color palettes.",
         "help-url": "https://www.construct.net/en/make-games/addons/1372/colorstore/documentation",
         "aceCategories": {
           "general": "General",
