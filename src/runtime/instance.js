@@ -1,7 +1,7 @@
 import { id } from "../../config.caw.js";
 import { c } from "../../template/aceDefine.js";
 import { Color, getRValue, getGValue, getBValue, getAValue, packRGBAEx } from "./color.js"
-import paletteMap from "./palettes.js";
+import palettes from "./palettes.js";
 
 
 export default function (parentClass) {
@@ -20,8 +20,8 @@ export default function (parentClass) {
       //   rgb: {r: 1,g: 0,b: 0, a: 1},
       //   hsla: {h: 0,s: 1,l: 0.5,a: 1}
       // };
-      this.palettes = ["endesga64", "cc29", "fantasy24", "mulfok32", "pear36", "pico8", "resurrect64"];
-      this.currentPalette = "endesga64";
+      this.currentPalette = palettes[0];
+      this.palettes = palettes;
     }
 
     packedColorToRGB(packed) {
@@ -122,20 +122,25 @@ export default function (parentClass) {
       };
     }
 
-    loadPalette(paletteIndex) {
-      const palette = this.palettes[paletteIndex];
-      this.currentPalette = palette ?? "";
-      switch (palette) {
-        case "endesga64": this.generateColorMapFromHexArray(paletteMap.endesga64); break;
-        case "cc29": this.generateColorMapFromHexArray(paletteMap.cc29); break;
-        case "fantasy24": this.generateColorMapFromHexArray(paletteMap.fantasy24); break;
-        case "mulfok32": this.generateColorMapFromHexArray(paletteMap.mulfok32); break;
-        case "pear36": this.generateColorMapFromHexArray(paletteMap.pear36); break;
-        case "pico8": this.generateColorMapFromHexArray(paletteMap.pico8); break;
-        case "resurrect64": this.generateColorMapFromHexArray(paletteMap.resurrect64); break;
-        default:
-          throw new Error(`Palette ${palette} not found`);
-        }
+    async loadPalette(paletteIndex) {
+      const palette = palettes[paletteIndex];
+      const fileName = Object.keys(palette)[0];
+      this.currentPalette = palette[fileName];
+      
+      var file = await this.runtime.assets.getProjectFileUrl(fileName);
+      var content = await this.runtime.assets.fetchText(file);
+
+      const hexArray = content.trim().split("\n").map(line => `#${line.trim()}`);
+      console.log(hexArray);
+      this.generateColorMapFromHexArray(hexArray);
+    }
+
+    async loadPaletteFromFile(fileName) {
+      var file = await this.runtime.assets.getProjectFileUrl(fileName);
+      var content = await this.runtime.assets.fetchText(file);
+      const hexArray = content.trim().split("\n").map(line => `#${line.trim()}`);
+      
+      this.generateColorMapFromHexArray(hexArray);
     }
 
     generateColorMapFromHexArray(hexArray) {

@@ -1,4 +1,5 @@
 import { action, condition, expression } from "../template/aceDefine.js";
+import palettes from "./runtime/palettes.js";
 
 const general = "general";
 const conversion = "conversion";
@@ -38,7 +39,7 @@ action(
   {
     highlight: false,
     deprecated: false,
-    isAsync: false,
+    isAsync: true,
     listName: "Load palette",
     displayText: "Load palette [i]{0}[/i]",
     description: "Loads a palette",
@@ -48,23 +49,48 @@ action(
         name: "Palette",
         desc: "The palette you want to load",
         type: "combo",
-        initialValue: "endesga64",
-        items: [
-          { endesga64: "endesga64" }, 
-          { cc29: "cc29" },
-          { fantasy24: "fantasy24" },
-          { mulfok32: "mulfok32" },
-          { pear32: "pear32" },
-          { pico8: "pico8" },
-          { resurrect64: "resurrect64" }
-        ],
+        initialValue: "endesga-64.hex",
+        items: palettes,
       },
     ],
   },
-  function (palette) {
-    this.loadPalette(palette);
+  async function (paletteIndex) {
+    await this.loadPalette(paletteIndex);
   }
 );
+
+// Load Palette From File
+action(
+  loading,
+  "LoadPaletteFromFile",
+  {
+    highlight: false,
+    deprecated: false,
+    isAsync: true,
+    listName: "Load palette from file",
+    displayText: "Load palette from file [i]{0}[/i]",
+    description: "Loads a palette from a file",
+    params: [
+      {
+        id: "fileName",
+        name: "File Name",
+        desc: "The name of the file you want to load from project files (ends in .hex), you can find palettes in https://lospec.com",
+        type: "string",
+        initialValue: "endesga-64.hex",
+      },
+    ],
+  },
+  async function (fileName) {
+    if (!fileName.endsWith(".hex")) {
+      console.error("File must end in .hex");
+      return;
+    }
+
+    await this.loadPaletteFromFile(fileName);
+    this.currentPalette = fileName.replace(".hex", "");
+  }
+);
+
 
 // ClearColorStore
 action(

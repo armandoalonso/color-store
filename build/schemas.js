@@ -249,6 +249,7 @@ const configSchema = Joi.object({
               "external-css"
             )
             .required(),
+            fileType: Joi.string().optional(),
         }).when(Joi.object({ type: Joi.string().valid("copy-to-output") }), {
           then: Joi.object({
             fileType: Joi.string().required(),
