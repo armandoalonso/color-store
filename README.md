@@ -1,4 +1,4 @@
-<img src="./examples/cover.gif" width="150" /><br>
+<img src="./examples/cover.png" width="150" /><br>
 # Color Store
 ### Version 3.0.1.1
 
