@@ -28,6 +28,12 @@ function getFileListFromConfig() {
     files.push(`c3runtime/${config.info.defaultImageUrl}`);
   }
 
+  if (config.files.typeScriptDefinitions) {
+    config.files.typeScriptDefinitions.forEach(function (file) {
+      files.push(`c3runtime/${file}`);
+    });
+  }
+
   return files;
 }
 

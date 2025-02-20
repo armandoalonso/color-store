@@ -13,7 +13,7 @@ export const version = _version;
 export const author = "piranha305";
 export const website = "https://piranha305.itch.io/";
 export const documentation = "https://www.construct.net/en/make-games/addons/1372/colorstore/documentation";
-export const description = "A plugin that allows you manage database of colors. easily convert between different color formats and use existing color palettes.";
+export const description = "A comprehensive Construct 3 plugin designed to store, manipulate, and seamlessly convert between various color formats, enhancing your project's color management capabilities.";
 export const category = ADDON_CATEGORY.DATA_AND_STORAGE;
 
 export const hasDomside = false;
@@ -83,6 +83,9 @@ export const files = {
     { "filename": "waft.hex", "type": "copy-to-output", fileType: "text/plain" },
     { "filename": "zughy-32.hex", "type": "copy-to-output", fileType: "text/plain" }
   ],
+  typeScriptDefinitions: [
+    "IColorStore.d.ts"
+  ],
 };
 
 // categories that are not filled will use the folder name
@@ -128,6 +131,12 @@ export const info = {
     Appearance: false,
     ZOrder: false,
   },
+  // // Script Interface
+  // ScriptInterfaceName: {
+  //   instance: "ColorStoreInstance",
+  //   //objectType: "Type",
+  //   //plugin: "Plugin",
+  // }
 };
 
 export const properties = [];

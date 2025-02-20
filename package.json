@@ -23,6 +23,7 @@
     "updateProjectData": "cd build && node updateProjectData.js",
     "init": "npm install && npm run updateProjectData",
     "generateDocs": "cd build && node generateDocumentation.js",
+    "generateTypeScriptDef": "cd build && node generateTypeScriptDef.js",
     "publish": "cd build && node publish.js"
   }
 }

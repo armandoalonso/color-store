@@ -40,6 +40,20 @@ export default function processDependencies() {
     }
   }
 
+  if(files.typeScriptDefinitions) {
+    for(const file of files.typeScriptDefinitions) {
+      const src = path.resolve(path.join("../src/interfaces", file));
+      const dest = path.resolve(path.join("../dist/export/c3runtime", file));
+
+      if (!fs.existsSync(src)) {
+        chalkUtils.error(`File not found: ${chalkUtils._errorUnderline(src)}`);
+        hadError = true;
+      } else {
+        fs.copyFileSync(src, dest);
+      }
+    }
+  }
+
   // check if files in files folder exist but aren't in the config
   const filesDir = "../src/files";
   if (fs.existsSync(filesDir)) {

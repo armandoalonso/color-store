@@ -75,8 +75,9 @@ action(
         id: "fileName",
         name: "File Name",
         desc: "The name of the file you want to load from project files (ends in .hex), you can find palettes in https://lospec.com",
-        type: "string",
-        initialValue: "endesga-64.hex",
+        type: "projectfile",
+        filter: ".hex",
+        //initialValue: "endesga-64.hex",
       },
     ],
   },
@@ -87,10 +88,39 @@ action(
     }
 
     await this.loadPaletteFromFile(fileName);
-    this.currentPalette = fileName.replace(".hex", "");
   }
 );
 
+//Load Palette From String
+action(
+  loading,
+  "LoadPaletteFromFileName",
+  {
+    highlight: false,
+    deprecated: false,
+    isAsync: true,
+    listName: "Load palette from filename",
+    displayText: "Load palette from filename [i]{0}[/i]",
+    description: "Loads a palette from a string",
+    params: [
+      {
+        id: "palette",
+        name: "Palette",
+        desc: "The palette name of the palette file you want to load",
+        type: "string",
+        initialValue: "\"endesga-64.hex\"",
+      },
+    ],
+  },
+  async function (palette) {
+    if (!palette.endsWith(".hex")) {
+      console.error("File must end in .hex");
+      return;
+    }
+
+    await this.loadPaletteFromFile(palette);
+  }
+);
 
 // ClearColorStore
 action(
@@ -152,7 +182,8 @@ action(
       rgb255: rgb,
       hsla: this.rgbToHLSA(rgb.r, rgb.g, rgb.b, rgb.a),
     }
-  }
+  },
+  true
 );
 
 // SetColorHex
@@ -197,7 +228,8 @@ action(
       rgb255: rgb,
       hsla: this.rgbToHLSA(rgb.r, rgb.g, rgb.b, rgb.a),
     }
-  }
+  },
+  true
 );
 
 // SetColorRGB
@@ -262,7 +294,8 @@ action(
       },
       hsla: this.rgbToHLSA(r, g, b, a)
     };
-  }
+  },
+  true
 );
 
 // SetColorRGBNormal
@@ -323,7 +356,8 @@ action(
       rgb: {r: r,g: g,b: b, a: a},
       hsla: this.rgbToHLSA(rgb.r, rgb.g, rgb.b, rgb.a)
     };
-  }
+  },
+  true
 );
 
 // SetColorHSL
@@ -389,9 +423,11 @@ action(
       rgb255: rgb,
       hsla: { h: h, s: s, l: l, a: a }
     };
-  }
+  },
+  true
 );
 
+// Hex
 expression(
   general,
   "Hex",
@@ -689,7 +725,6 @@ expression(
   }
 );
 
-
 expression(
   general,
   "GetColorJson",
@@ -851,5 +886,422 @@ expression(
   },
   function () {
     return this.currentPalette;
+  }
+);
+
+
+// Color Count
+expression(
+  general,
+  "ColorCount",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the number of colors in the color store",
+    params: [],
+  },
+  function () {
+    return Object.keys(this.colorMap).length;
+  }
+)
+
+expression(
+  general,
+  "HexIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "string",
+    description: "Returns the color as a hex string",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].hex;
+  }
+);
+
+expression(
+  general,
+  "PackedIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color as a packed number",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].packed;
+  }
+);
+
+expression(
+  general,
+  "RedIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's red value",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].rgb255.r;
+  }
+);
+
+expression(
+  general,
+  "GreenIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's green value",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].rgb255.g;
+  }
+);
+
+expression(
+  general,
+  "BlueIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's blue value",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].rgb255.b;
+  }
+);
+
+expression(
+  general,
+  "AlphaIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's alpha value",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    return this.colorMap[keys[index]].rgb255.a;
+  }
+);
+
+expression(
+  general,
+  "NormalizedRedIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's red value (normalized)",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].rgb.r;
+  }
+);
+
+expression(
+  general,
+  "NormalizedGreenIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's green value (normalized)",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].rgb.g;
+  }
+);
+
+expression(
+  general,
+  "NormalizedBlueIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's blue value (normalized)",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].rgb.b;
+  }
+);
+
+expression(
+  general,
+  "NormalizedAlphaIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's alpha value (normalized)",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].rgb.a;
+  }
+);
+
+expression(
+  general,
+  "HueIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's hue value",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].hsla.h;
+  }
+);
+
+expression(
+  general,
+  "SaturationIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's saturation value",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].hsla.s;
+  }
+);
+
+expression(
+  general,
+  "LightnessIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "number",
+    description: "Returns the color's lightness value",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    return this.colorMap[keys[index]].hsla.l;
+  }
+);
+
+expression(
+  general,
+  "GetColorJsonIndexed",
+  {
+    highlight: false,
+    deprecated: false,
+    returnType: "string",
+    description: "Returns the color's value as JSON",
+    params: [
+      {
+        id: "index",
+        name: "Index",
+        desc: "The index that will be used to reference the color",
+        type: "number"
+      },
+    ],
+  },
+  function (index) {
+    const keys = Object.keys(this.colorMap);
+    if (index >= keys.length) {
+      console.warn("Index out of bounds, return first color");
+      index = 0;
+    }
+    const json = JSON.stringify(this.colorMap[keys[index]]);
+    return json;
+  }
+);
+
+condition(
+  general,
+  "CurrentPaletteIs",
+  {
+    highlight: false,
+    deprecated: false,
+    listName: "Current palette is",
+    displayText: "Current palette is [i]{0}[/i]",
+    description: "Checks if the current palette is the specified palette",
+    params: [
+      {
+        id: "palette",
+        name: "Palette",
+        desc: "The palette you want to check (don't include .hex)",
+        type: "string",
+        initialValue: "\"endesga-64\"",
+        autocompleteId: "paletteName",
+      },
+    ],
+  },
+  function (palette) {
+    return this.currentPalette === palette;
   }
 );

@@ -131,13 +131,13 @@ export default function (parentClass) {
       var content = await this.runtime.assets.fetchText(file);
 
       const hexArray = content.trim().split("\n").map(line => `#${line.trim()}`);
-      console.log(hexArray);
       this.generateColorMapFromHexArray(hexArray);
     }
 
     async loadPaletteFromFile(fileName) {
       var file = await this.runtime.assets.getProjectFileUrl(fileName);
       var content = await this.runtime.assets.fetchText(file);
+      this.currentPalette = fileName.replace(".hex", "");
       const hexArray = content.trim().split("\n").map(line => `#${line.trim()}`);
       
       this.generateColorMapFromHexArray(hexArray);
@@ -165,6 +165,20 @@ export default function (parentClass) {
 
     clearColorMap() {
       this.colorMap = {};
+    }
+
+    colorIndex(tag) {
+      const keys = Object.keys(this.colorMap);
+      const index = keys.indexOf(tag);
+      return index;
+    }
+
+    colorTag(index) {
+      const keys = Object.keys(this.colorMap);
+      if(index < 0 || index >= keys.length) {
+        return "";
+      }
+      return keys[index];
     }
 
     _trigger(method) {

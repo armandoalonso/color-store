@@ -5,7 +5,7 @@
     "plugins": {
       "piranha305_colorstore": {
         "name": "Color Store",
-        "description": "A plugin that allows you manage database of colors. easily convert between different color formats and use existing color palettes.",
+        "description": "A comprehensive Construct 3 plugin designed to store, manipulate, and seamlessly convert between various color formats, enhancing your project's color management capabilities.",
         "help-url": "https://www.construct.net/en/make-games/addons/1372/colorstore/documentation",
         "aceCategories": {
           "general": "General",
@@ -227,9 +227,32 @@
                 "desc": "The name of the file you want to load from project files (ends in .hex), you can find palettes in https://lospec.com"
               }
             }
+          },
+          "LoadPaletteFromFileName": {
+            "list-name": "Load palette from filename",
+            "display-text": "Load palette from filename [i]{0}[/i]",
+            "description": "Loads a palette from a string",
+            "params": {
+              "palette": {
+                "name": "Palette",
+                "desc": "The palette name of the palette file you want to load"
+              }
+            }
           }
         },
-        "conditions": {},
+        "conditions": {
+          "CurrentPaletteIs": {
+            "list-name": "Current palette is",
+            "display-text": "Current palette is [i]{0}[/i]",
+            "description": "Checks if the current palette is the specified palette",
+            "params": {
+              "palette": {
+                "name": "Palette",
+                "desc": "The palette you want to check (don't include .hex)"
+              }
+            }
+          }
+        },
         "expressions": {
           "HexToPacked": {
             "translated-name": "HexToPacked",
@@ -283,6 +306,16 @@
               }
             }
           },
+          "AlphaIndexed": {
+            "translated-name": "AlphaIndexed",
+            "description": "Returns the color's alpha value",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
+              }
+            }
+          },
           "Blue": {
             "translated-name": "Blue",
             "description": "Returns the color's blue value",
@@ -292,6 +325,21 @@
                 "desc": "The tag that will be used to reference the color"
               }
             }
+          },
+          "BlueIndexed": {
+            "translated-name": "BlueIndexed",
+            "description": "Returns the color's blue value",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
+              }
+            }
+          },
+          "ColorCount": {
+            "translated-name": "ColorCount",
+            "description": "Returns the number of colors in the color store",
+            "params": {}
           },
           "CurrentPalette": {
             "translated-name": "CurrentPalette",
@@ -305,6 +353,16 @@
               "tag": {
                 "name": "Tag",
                 "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "GetColorJsonIndexed": {
+            "translated-name": "GetColorJsonIndexed",
+            "description": "Returns the color's value as JSON",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
               }
             }
           },
@@ -323,6 +381,16 @@
               }
             }
           },
+          "GreenIndexed": {
+            "translated-name": "GreenIndexed",
+            "description": "Returns the color's green value",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
+              }
+            }
+          },
           "Hex": {
             "translated-name": "Hex",
             "description": "Returns the color as a hex string",
@@ -330,6 +398,16 @@
               "tag": {
                 "name": "Tag",
                 "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "HexIndexed": {
+            "translated-name": "HexIndexed",
+            "description": "Returns the color as a hex string",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
               }
             }
           },
@@ -343,6 +421,16 @@
               }
             }
           },
+          "HueIndexed": {
+            "translated-name": "HueIndexed",
+            "description": "Returns the color's hue value",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
+              }
+            }
+          },
           "Lightness": {
             "translated-name": "Lightness",
             "description": "Returns the color's lightness value",
@@ -350,6 +438,16 @@
               "tag": {
                 "name": "Tag",
                 "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "LightnessIndexed": {
+            "translated-name": "LightnessIndexed",
+            "description": "Returns the color's lightness value",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
               }
             }
           },
@@ -363,6 +461,16 @@
               }
             }
           },
+          "NormalizedAlphaIndexed": {
+            "translated-name": "NormalizedAlphaIndexed",
+            "description": "Returns the color's alpha value (normalized)",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
+              }
+            }
+          },
           "NormalizedBlue": {
             "translated-name": "NormalizedBlue",
             "description": "Returns the color's blue value (normalized)",
@@ -370,6 +478,16 @@
               "tag": {
                 "name": "Tag",
                 "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "NormalizedBlueIndexed": {
+            "translated-name": "NormalizedBlueIndexed",
+            "description": "Returns the color's blue value (normalized)",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
               }
             }
           },
@@ -383,6 +501,16 @@
               }
             }
           },
+          "NormalizedGreenIndexed": {
+            "translated-name": "NormalizedGreenIndexed",
+            "description": "Returns the color's green value (normalized)",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
+              }
+            }
+          },
           "NormalizedREd": {
             "translated-name": "NormalizedREd",
             "description": "Returns the color's red value (normalized)",
@@ -393,6 +521,16 @@
               }
             }
           },
+          "NormalizedRedIndexed": {
+            "translated-name": "NormalizedRedIndexed",
+            "description": "Returns the color's red value (normalized)",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
+              }
+            }
+          },
           "Packed": {
             "translated-name": "Packed",
             "description": "Returns the color as a packed number",
@@ -400,6 +538,16 @@
               "tag": {
                 "name": "Tag",
                 "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "PackedIndexed": {
+            "translated-name": "PackedIndexed",
+            "description": "Returns the color as a packed number",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
               }
             }
           },
@@ -418,6 +566,16 @@
               }
             }
           },
+          "RedIndexed": {
+            "translated-name": "RedIndexed",
+            "description": "Returns the color's red value",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
+              }
+            }
+          },
           "Saturation": {
             "translated-name": "Saturation",
             "description": "Returns the color's saturation value",
@@ -425,6 +583,16 @@
               "tag": {
                 "name": "Tag",
                 "desc": "The tag that will be used to reference the color"
+              }
+            }
+          },
+          "SaturationIndexed": {
+            "translated-name": "SaturationIndexed",
+            "description": "Returns the color's saturation value",
+            "params": {
+              "index": {
+                "name": "Index",
+                "desc": "The index that will be used to reference the color"
               }
             }
           }
